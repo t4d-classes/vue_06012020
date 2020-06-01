@@ -11,6 +11,20 @@ new Vue({
       { id: 3, name: 'dark teal' },
       { id: 4, name: 'dodger blue' },
     ],
+    colorForm: {
+      name: '',
+    },
+  },
+  methods: {
+    addColor() {
+
+      this.colors.push({
+        id: Math.max(...this.colors.map(c => c.id), 0) + 1,
+        name: this.colorForm.name,
+      });
+
+      this.colorForm.name = '';
+    },
   },
   delimiters: ['[[', ']]'],
   template: `
@@ -18,11 +32,20 @@ new Vue({
       <header>
         <h1>[[headerText]]</h1>
       </header>
+      <h2>Color List</h2>
       <ul>
         <li v-for="color in colors">
           [[color.name + '(id: ' + color.id + ')']]
         </li>
       </ul>
+      <h2>Color Form</h2>
+      <form>
+        <div>
+          <label for="color-name-input">Name</label>
+          <input type="text" id="color-name-input" v-model="colorForm.name" >
+        </div>
+        <button type="button" v-on:click="addColor()">Add Color</button>
+      </form>
     </div>
   `,
 });
