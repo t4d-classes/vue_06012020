@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link href="reset.css" rel="stylesheet">
+    <link href="site.css" rel="stylesheet">
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <script>
+
+      'use strict';
+
+      function doSomething() {
+        
+        console.log(this);
+
+        // const that = this;
+
+        const inner = () => {
+          console.log(this);
+        }
+
+        inner();
+      }
+
+      /*
+      doSomething();
+
+      window.doSomething();
+      */
+      const o = {
+        id: 2,
+
+        // normal properties
+        // name: 'test',
+
+        _name: 'test',
+        get name() {
+          console.log('getting name');
+          return this._name;
+        },
+        set name(value) {
+          console.log('setting name');
+          this._name = value;
+
+          // code triggers re-render
+        },
+
+        _title: 'test',
+        get title() {
+          console.log('getting title');
+          return this._title;
+        },
+        set title(value) {
+          console.log('setting title');
+          this._title = value;
+
+          // code triggers re-render
+        },
+
+
+        // doSomething: function() {
+        doSomething() {
+        
+          console.log(this);
+  
+          // const that = this;
+  
+          const inner = () => {
+            console.log(this);
+          }
+  
+          inner();
+        },
+      };
+
+      o.name = 'this is fun';
+      o.title = 'some title';
+      console.log(o.name);
+
+      // o.doSomething();
+
+      // console.log(window.doSomething === o.doSomething);
+
+    </script>
+  </body>
+</html>
