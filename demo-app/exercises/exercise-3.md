@@ -10,4 +10,6 @@
 
 Hint: use the splice function to remove an item from the array.
 
+Hint: You can pass an argument from the template: deleteCar(car.id)
+
 5. Ensure it works!

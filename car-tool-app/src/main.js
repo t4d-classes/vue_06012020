@@ -9,6 +9,24 @@ new Vue({
       { id: 1, make: 'Ford', model: 'Fusion Hybrid', year: 2020, color: 'blue', price: 45000 },
       { id: 2, make: 'Tesla', model: 'S', year: 2018, color: 'red', price: 130000 },
     ],
+    carForm: {
+      make: '',
+      model: '',
+      color: '',
+      year: '',
+      price: '',
+    },
+  },
+  methods: {
+    addColor() {
+
+      this.colors.push({
+        id: Math.max(...this.colors.map(c => c.id), 0) + 1,
+        name: this.colorForm.name,
+      });
+
+      this.colorForm.name = '';
+    },
   },
   template: `
     <div>
