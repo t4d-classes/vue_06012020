@@ -1,12 +1,14 @@
 import Vue from 'vue';
 
 import PageHeaderComponent from './components/PageHeaderComponent';
+import ColorFormComponent from './components/ColorFormComponent';
 
 new Vue({
 
   el: '#app',
   components: {
     'page-header': PageHeaderComponent,
+    'color-form': ColorFormComponent,
   },
   data: {
 
@@ -17,25 +19,20 @@ new Vue({
       { id: 3, name: 'dark teal' },
       { id: 4, name: 'dodger blue' },
     ],
-    colorForm: {
-      name: '',
-    },
   },
   methods: {
-    addColor() {
+    addColor(colorName) {
 
       this.colors.push({
         id: Math.max(...this.colors.map(c => c.id), 0) + 1,
-        name: this.colorForm.name,
+        name: colorName,
       });
-
-      this.colorForm.name = '';
     },
   },
   delimiters: ['[[', ']]'],
   template: `
     <div>
-      <page-header v-bind:header-text="headerText"></page-header>
+      <page-header :header-text="headerText"></page-header>
       <h2>Color List</h2>
       <ul>
         <li v-for="color in colors">
@@ -43,13 +40,7 @@ new Vue({
         </li>
       </ul>
       <h2>Color Form</h2>
-      <form>
-        <div>
-          <label for="color-name-input">Name</label>
-          <input type="text" id="color-name-input" v-model="colorForm.name" >
-        </div>
-        <button type="button" v-on:click="addColor()">Add Color</button>
-      </form>
+      <color-form button-text="Add Color" @submit-color="addColor($event)" />
     </div>
   `,
 });
