@@ -1,8 +1,19 @@
 import Vue from 'vue';
 
+import PageHeaderComponent from './components/PageHeaderComponent';
+import PageFooterComponent from './components/PageFooterComponent';
+import CarTableSectionHeaderComponent from './components/CarTableSectionHeaderComponent';
+import CarFormSectionHeaderComponent from './components/CarFormSectionHeaderComponent';
+
 new Vue({
 
   el: '#app',
+  components: {
+    PageHeader: PageHeaderComponent,
+    'page-footer': PageFooterComponent,
+    'car-table-section-header': CarTableSectionHeaderComponent,
+    'car-form-section-header': CarFormSectionHeaderComponent,
+  },
   data: {
     headerText: 'Car Tool',
     cars: [
@@ -40,10 +51,8 @@ new Vue({
   },
   template: `
     <div>
-      <header>
-        <h1>{{headerText}}</h1>
-      </header>
-      <h2>Car Table</h2>
+      <page-header></page-header>
+      <car-table-section-header></car-table-section-header>
       <table>
         <thead>
           <tr>
@@ -68,7 +77,7 @@ new Vue({
           </tr>
         </tbody>
       </table>
-      <h2>Car Form</h2>
+      <car-form-section-header></car-form-section-header>
       <form>
         <div>
           <label for="car-make-input">Make</label>
@@ -92,6 +101,7 @@ new Vue({
         </div>
         <button type="button" v-on:click="addCar()">Add Car</button>
       </form>
+      <page-footer></page-footer>
     </div>
   `,
 });

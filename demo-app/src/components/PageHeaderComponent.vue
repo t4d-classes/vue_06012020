@@ -7,11 +7,18 @@
 <script>
 export default {
   name: 'page-header',
-  data() {
-    return {
-      headerText: 'Color Tool',
-    };
-  },
+  // props: [ 'headerText' ],
+  props: {
+    headerText: {
+      type: String,
+      default: () => 'The Tool',
+    },
+  }
+  // data() {
+  //   return {
+  //     headerText: 'Color Tool',
+  //   };
+  // },
 }
 </script>
 
