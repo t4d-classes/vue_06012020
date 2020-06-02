@@ -12,7 +12,8 @@
       </tr>
     </thead>
     <tbody>
-      <car-view-row v-for="car in cars" :key="car.id" :car="car" />
+      <car-view-row v-for="car in cars" :key="car.id" :car="car"
+        v-on:delete-car="$emit('delete-car', $event)" />
     </tbody>
   </table>
 </template>
@@ -31,6 +32,11 @@ export default {
       type: Array,
     },
   },
+  // methods: {
+  //   deleteCar(carId) {
+  //     this.$emit('delete-car', carId);
+  //   }
+  // }
 }
 </script>
 

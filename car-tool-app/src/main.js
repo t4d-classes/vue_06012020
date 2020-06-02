@@ -50,7 +50,7 @@ new Vue({
     <div>
       <page-header header-text="Car Tool" />
       <section-header header-text="Car Table" />
-      <car-table :cars="cars" />
+      <car-table :cars="cars" v-on:delete-car="deleteCar($event)" />
       <section-header header-text="Car Form" />
       <form>
         <div>

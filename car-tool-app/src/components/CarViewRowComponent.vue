@@ -18,6 +18,11 @@ export default {
       type: Object
     }
   },
+  methods: {
+    deleteCar(carId) {
+      this.$emit('delete-car', carId);
+    }
+  },
 }
 </script>
 
