@@ -2,8 +2,8 @@ import Vue from 'vue';
 
 import PageHeaderComponent from './components/PageHeaderComponent';
 import PageFooterComponent from './components/PageFooterComponent';
-import CarTableSectionHeaderComponent from './components/CarTableSectionHeaderComponent';
-import CarFormSectionHeaderComponent from './components/CarFormSectionHeaderComponent';
+import SectionHeaderComponent from './components/SectionHeaderComponent';
+import CarTableComponent from './components/CarTableComponent';
 
 new Vue({
 
@@ -11,11 +11,10 @@ new Vue({
   components: {
     PageHeader: PageHeaderComponent,
     'page-footer': PageFooterComponent,
-    'car-table-section-header': CarTableSectionHeaderComponent,
-    'car-form-section-header': CarFormSectionHeaderComponent,
+    'section-header': SectionHeaderComponent,
+    'car-table': CarTableComponent,
   },
   data: {
-    headerText: 'Car Tool',
     cars: [
       { id: 1, make: 'Ford', model: 'Fusion Hybrid', year: 2020, color: 'blue', price: 45000 },
       { id: 2, make: 'Tesla', model: 'S', year: 2018, color: 'red', price: 130000 },
@@ -33,8 +32,6 @@ new Vue({
 
       this.cars.push({
         ...this.carForm,
-        // make: this.carForm.make,
-        // model: this.carForm.model,
         id: Math.max(...this.cars.map(c => c.id), 0) + 1,
       });
 
@@ -51,33 +48,10 @@ new Vue({
   },
   template: `
     <div>
-      <page-header></page-header>
-      <car-table-section-header></car-table-section-header>
-      <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Make</th>
-            <th>Model</th>
-            <th>Year</th>
-            <th>Color</th>
-            <th>Price</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="car in cars">
-            <td>{{car.id}}</td> 
-            <td>{{car.make}}</td> 
-            <td>{{car.model}}</td> 
-            <td>{{car.year}}</td> 
-            <td>{{car.color}}</td> 
-            <td>{{car.price}}</td>
-            <td><button type="button" v-on:click="deleteCar(car.id)">Delete</button></td>
-          </tr>
-        </tbody>
-      </table>
-      <car-form-section-header></car-form-section-header>
+      <page-header header-text="Car Tool" />
+      <section-header header-text="Car Table" />
+      <car-table :cars="cars" />
+      <section-header header-text="Car Form" />
       <form>
         <div>
           <label for="car-make-input">Make</label>
@@ -101,7 +75,7 @@ new Vue({
         </div>
         <button type="button" v-on:click="addCar()">Add Car</button>
       </form>
-      <page-footer></page-footer>
+      <page-footer company-name="My Car Company, Inc." />
     </div>
   `,
 });

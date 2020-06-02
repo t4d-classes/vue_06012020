@@ -2,7 +2,7 @@
   font-family: arial;
 }
 
-header, table {
+header {
   margin: 20px;
 }
 
@@ -11,12 +11,3 @@ h1 {
   font-weight: bold;
 }
 
-th, td {
-  border: 1px solid black;
-  padding: 4px;
-}
-
-th {
-  font-weight: bold;
-  text-align:center;
-}

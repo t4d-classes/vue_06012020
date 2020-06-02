@@ -7,10 +7,10 @@
 <script>
 export default {
   name: 'page-header',
-  data() {
-    return {
-      headerText: 'Car Tool',
-    };
+  props: {
+    headerText: {
+      type: String,
+    },
   },
 }
 </script>

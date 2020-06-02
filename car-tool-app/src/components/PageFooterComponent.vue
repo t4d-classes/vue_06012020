@@ -7,10 +7,14 @@
 <script>
 export default {
   name: 'page-footer',
+  props: {
+    companyName: {
+      type: String,
+    },
+  },
   data() {
     return {
       currentYear: new Date().getFullYear(),
-      companyName: 'My Car Company, Inc.',
     };
   },
 }
