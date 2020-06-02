@@ -6,7 +6,10 @@
     <td>{{car.year}}</td> 
     <td>{{car.color}}</td> 
     <td>{{car.price}}</td>
-    <td><button type="button" v-on:click="deleteCar(car.id)">Delete</button></td>
+    <td>
+      <button type="button" v-on:click="$emit('edit-car', car.id)">Edit</button>
+      <button type="button" v-on:click="$emit('delete-car', car.id)">Delete</button>
+    </td>
   </tr>
 </template>
 
@@ -16,11 +19,6 @@ export default {
   props: {
     car: {
       type: Object
-    }
-  },
-  methods: {
-    deleteCar(carId) {
-      this.$emit('delete-car', carId);
     }
   },
 }

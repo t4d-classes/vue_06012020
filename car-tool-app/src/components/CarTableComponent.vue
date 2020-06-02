@@ -12,8 +12,12 @@
       </tr>
     </thead>
     <tbody>
-      <car-view-row v-for="car in cars" :key="car.id" :car="car"
-        v-on:delete-car="$emit('delete-car', $event)" />
+      <template v-for="car in cars">
+        <car-edit-row v-if="car.id === editCarId" :car="car" :key="car.id"
+          @save-car="$emit('save-car', $event)" @cancel-car="$emit('cancel-car')" />
+        <car-view-row v-if="car.id !== editCarId" :car="car" :key="car.id"
+          @edit-car="$emit('edit-car', $event)" @delete-car="$emit('delete-car', $event)" />
+      </template>
     </tbody>
   </table>
 </template>
@@ -21,22 +25,24 @@
 <script>
 
 import CarViewRowComponent from './CarViewRowComponent';
+import CarEditRowComponent from './CarEditRowComponent';
 
 export default {
   name: 'car-table-component',
   components: {
     'car-view-row': CarViewRowComponent,
+    'car-edit-row': CarEditRowComponent,
   },
   props: {
     cars: {
       type: Array,
+      defailt: () => [],
+    },
+    editCarId: {
+      type: Number,
+      default : -1,
     },
   },
-  // methods: {
-  //   deleteCar(carId) {
-  //     this.$emit('delete-car', carId);
-  //   }
-  // }
 }
 </script>
 
