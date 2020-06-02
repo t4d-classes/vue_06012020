@@ -1,10 +1,46 @@
 import Vue from 'vue';
 
+import PageHeaderComponent from './components/PageHeaderComponent';
+
+// global registation
+// Vue.component('page-header', {
+
+//   data() {
+//     return {
+//       headerText: 'Color Tool',
+//     };
+//   },
+//   delimiters: ['[[', ']]'],
+//   template: `
+//     <header>
+//       <h1>[[headerText]]</h1>
+//     </header>
+//   `,
+// });
+
+// local registration
+// const pageHeaderComponent = {
+//   data() {
+//     return {
+//       headerText: 'Color Tool',
+//     };
+//   },
+//   delimiters: ['[[', ']]'],
+//   template: `
+//     <header>
+//       <h1>[[headerText]]</h1>
+//     </header>
+//   `,
+// };
+
 new Vue({
 
   el: '#app',
+  // local registration
+  components: {
+    'page-header': PageHeaderComponent,
+  },
   data: {
-    headerText: 'Color Tool',
     colors: [
       { id: 1, name: 'purple' },
       { id: 2, name: 'blue' },
@@ -29,9 +65,7 @@ new Vue({
   delimiters: ['[[', ']]'],
   template: `
     <div>
-      <header>
-        <h1>[[headerText]]</h1>
-      </header>
+      <page-header></page-header>
       <h2>Color List</h2>
       <ul>
         <li v-for="color in colors">

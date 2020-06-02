@@ -15,5 +15,41 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script>
+
+      const person = {
+        firstName: 'Bob',
+        lastName: 'Smith',
+        age: 45,
+      };
+
+      /*
+      console.log(person.lastName);
+
+      // destructuring
+      
+      // const lastName = person.lastName;
+      const { lastName, ...otherProps } = person;
+
+      console.log(lastName);
+      console.log(otherProps);
+
+      */
+
+      /*
+      const printFullName = ({ firstName, lastName }) => {
+        console.log(firstName + ' ' + lastName);
+      };
+
+      printFullName(person);
+      */
+
+
+      const [ first, second, ...otherNums ] = [ ...[1,2,3,4,5] ];
+
+      console.log(first, second, otherNums);
+
+
+    </script>
   </body>
 </html>
