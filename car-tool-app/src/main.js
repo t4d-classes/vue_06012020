@@ -1,5 +1,7 @@
 import Vue from 'vue';
+import Vuex, { mapGetters, mapMutations } from 'vuex';
 
+import { createStore } from './store';
 import PageLayoutComponent from './components/PageLayoutComponent';
 import PageHeaderComponent from './components/PageHeaderComponent';
 import PageFooterComponent from './components/PageFooterComponent';
@@ -7,9 +9,12 @@ import SectionHeaderComponent from './components/SectionHeaderComponent';
 import CarTableComponent from './components/CarTableComponent';
 import CarFormComponent from './components/CarFormComponent';
 
+Vue.use(Vuex);
+
 new Vue({
 
   el: '#app',
+  store: createStore(),
   components: {
     PageHeader: PageHeaderComponent,
     'page-footer': PageFooterComponent,
@@ -19,20 +24,20 @@ new Vue({
     'page-layout': PageLayoutComponent,
   },
   data: {
-    cars: [
-      { id: 1, make: 'Ford', model: 'Fusion Hybrid', year: 2020, color: 'blue', price: 45000 },
-      { id: 2, make: 'Tesla', model: 'S', year: 2018, color: 'red', price: 130000 },
-    ],
     editCarId: -1,
   },
+  computed: {
+    ...mapGetters([ 'cars' ]),
+  },
   methods: {
-    addCar(car) {
-      this.cars.push({
-        id: Math.max(...this.cars.map(c => c.id), 0) + 1,
-        ...car,
-      });
-      this.editCarId = -1;
-    },
+    ...mapMutations([ 'addCar' ]),
+    // addCar(car) {
+    //   this.cars.push({
+    //     id: Math.max(...this.cars.map(c => c.id), 0) + 1,
+    //     ...car,
+    //   });
+    //   this.editCarId = -1;
+    // },
     deleteCar(carId) {
       const carIndex = this.cars.findIndex(c => c.id === carId);
       this.cars.splice(carIndex, 1);
