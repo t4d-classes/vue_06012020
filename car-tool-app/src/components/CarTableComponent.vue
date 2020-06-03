@@ -5,27 +5,32 @@
         <th>Id</th>
         <th>
           <button @click="sortCars('make')">
-            <label v-once v-bind:for="fieldId('make', tableId)">Make</label>
+            <label v-if="editCarId > 0" v-once :for="fieldId('make')">Make</label>
+            <span v-else>Make</span>
           </button>
         </th>
         <th>
           <button @click="sortCars('model')">
-            <label v-once v-bind:for="fieldId('model', tableId)">Model</label>
+            <label v-if="editCarId > 0" v-once :for="fieldId('model')">Model</label>
+            <span v-else>Model</span>
           </button>
         </th>
         <th>
           <button @click="sortCars('year')">
-            <label v-once v-bind:for="fieldId('year', tableId)">Year</label>
+            <label v-if="editCarId > 0" v-once :for="fieldId('year')">Year</label>
+            <span v-else>Year</span>
           </button>
         </th>
         <th>
           <button @click="sortCars('color')">
-            <label v-once v-bind:for="fieldId('color', tableId)">Color</label>
+            <label v-if="editCarId > 0" v-once :for="fieldId('color')">Color</label>
+            <span v-else>Color</span>
           </button>
         </th>
         <th>
           <button @click="sortCars('price')">
-            <label v-once v-bind:for="fieldId('price', tableId)">Price</label>
+            <label v-if="editCarId > 0" v-once :for="fieldId('price')">Price</label>
+            <span v-else>Price</span>
           </button>
         </th>
         <th>Actions</th>
