@@ -1,6 +1,14 @@
 <template>
   <div class="page-layout">
-    <slot></slot>
+    <div class="header-block">
+      <slot name="header-block"></slot>
+    </div>
+    <div class="list-block">
+      <slot name="list-block"></slot>
+    </div>
+    <div class="form-block">
+      <slot name="form-block"></slot>
+    </div>
   </div>
 </template>
 
@@ -26,6 +34,19 @@ export default {
       "header"
       "list"
       "form";
+  }
+
+  .header-block {
+    grid-area: header;
+    background-color: navy;
+  }
+
+  .list-block {
+    grid-area: list;
+  }
+
+  .form-block {
+    grid-area: form;
   }
 
 </style>

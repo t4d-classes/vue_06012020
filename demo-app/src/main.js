@@ -34,13 +34,13 @@ new Vue({
   delimiters: ['[[', ']]'],
   template: `
     <page-layout>
-      <div class="header-block">
+      <template v-slot:header-block>
         <page-header>
           <h1>[[headerText]]</h1>
           <small>We are the best Color Tool!</small>
         </page-header>
-      </div>
-      <div class="list-block">
+      </template>
+      <template v-slot:list-block>
         <h2>Color List</h2>
         <div v-if="!colors.length">
           There are no colors.
@@ -55,10 +55,10 @@ new Vue({
             </li>
           </template>
         </ul>
-      </div>
-      <div class="form-block">
+      </template>
+      <template v-slot:form-block>
         <color-form button-text="Add Color" @submit-color="addColor($event)" />
-      </div>
+      </template>
     </page-layout>
   `,
 });
