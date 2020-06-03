@@ -1,42 +1,35 @@
 import Vue from 'vue';
+import Vuex, { mapGetters, mapMutations } from 'vuex';
 
+import { createStore } from './store';
 import PageHeaderComponent from './components/PageHeaderComponent';
 import ColorFormComponent from './components/ColorFormComponent';
-import PageLayoutComponent from './components/PageLayoutComponent';
+import PageLayout from './components/PageLayoutComponent';
+
+Vue.use(Vuex);
 
 new Vue({
 
   el: '#app',
+  store: createStore(),
   components: {
     'page-header': PageHeaderComponent,
     'color-form': ColorFormComponent,
-    'page-layout': PageLayoutComponent,
+    // 'page-layout': PageLayoutComponent,
+    PageLayout,
   },
-  data: {
-
-    headerText: 'Color Tool',
-    colors: [
-      // { id: 1, name: 'purple' },
-      // { id: 2, name: 'blue' },
-      // { id: 3, name: 'dark teal' },
-      // { id: 4, name: 'dodger blue' },
-    ],
+  computed: {
+    ...mapGetters([ 'colors' ]),
   },
   methods: {
-    addColor(colorName) {
-
-      this.colors.push({
-        id: Math.max(...this.colors.map(c => c.id), 0) + 1,
-        name: colorName,
-      });
-    },
+    ...mapMutations([ 'addColor' ]),
   },
   delimiters: ['[[', ']]'],
   template: `
     <page-layout>
       <template v-slot:header-block>
         <page-header>
-          <h1>[[headerText]]</h1>
+          <h1>Color Tool</h1>
           <small>We are the best Color Tool!</small>
         </page-header>
       </template>
