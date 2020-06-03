@@ -1,9 +1,7 @@
 <template>
   <form>
-    <div>
-      <label for="color-name-input">Name</label>
-      <input type="text" id="color-name-input" v-model="colorForm.name" >
-    </div>
+    <label for="color-name-input">Name</label>
+    <input type="text" id="color-name-input" v-model="colorForm.name" >
     <button type="button" v-on:click="submitColor()">{{buttonText}}</button>
   </form>
 </template>

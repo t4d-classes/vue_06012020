@@ -16,3 +16,16 @@ ul {
   list-style-position: inside;
   margin-left: 30px;
 }
+
+.header-block {
+  grid-area: header;
+  background-color: navy;
+}
+
+.list-block {
+  grid-area: list;
+}
+
+.form-block {
+  grid-area: form;
+}

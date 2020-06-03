@@ -15,7 +15,7 @@
       <template v-for="car in cars">
         <car-edit-row v-if="car.id === editCarId" :car="car" :key="car.id"
           @save-car="$emit('save-car', $event)" @cancel-car="$emit('cancel-car')" />
-        <car-view-row v-if="car.id !== editCarId" :car="car" :key="car.id"
+        <car-view-row v-else :car="car" :key="car.id"
           @edit-car="$emit('edit-car', $event)" @delete-car="$emit('delete-car', $event)" />
       </template>
     </tbody>

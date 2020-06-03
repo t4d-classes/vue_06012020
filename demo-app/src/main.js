@@ -2,6 +2,7 @@ import Vue from 'vue';
 
 import PageHeaderComponent from './components/PageHeaderComponent';
 import ColorFormComponent from './components/ColorFormComponent';
+import PageLayoutComponent from './components/PageLayoutComponent';
 
 new Vue({
 
@@ -9,15 +10,16 @@ new Vue({
   components: {
     'page-header': PageHeaderComponent,
     'color-form': ColorFormComponent,
+    'page-layout': PageLayoutComponent,
   },
   data: {
 
     headerText: 'Color Tool',
     colors: [
-      { id: 1, name: 'purple' },
-      { id: 2, name: 'blue' },
-      { id: 3, name: 'dark teal' },
-      { id: 4, name: 'dodger blue' },
+      // { id: 1, name: 'purple' },
+      // { id: 2, name: 'blue' },
+      // { id: 3, name: 'dark teal' },
+      // { id: 4, name: 'dodger blue' },
     ],
   },
   methods: {
@@ -31,16 +33,32 @@ new Vue({
   },
   delimiters: ['[[', ']]'],
   template: `
-    <div>
-      <page-header :header-text="headerText"></page-header>
-      <h2>Color List</h2>
-      <ul>
-        <li v-for="color in colors">
-          [[color.name + '(id: ' + color.id + ')']]
-        </li>
-      </ul>
-      <h2>Color Form</h2>
-      <color-form button-text="Add Color" @submit-color="addColor($event)" />
-    </div>
+    <page-layout>
+      <div class="header-block">
+        <page-header>
+          <h1>[[headerText]]</h1>
+          <small>We are the best Color Tool!</small>
+        </page-header>
+      </div>
+      <div class="list-block">
+        <h2>Color List</h2>
+        <div v-if="!colors.length">
+          There are no colors.
+        </div>
+        <ul v-else>
+          <template v-for="color in colors">
+            <li>
+              [[color.name + '(id: ' + color.id + ')']]
+            </li>
+            <li>
+              [[color.name.toUpperCase()]]
+            </li>
+          </template>
+        </ul>
+      </div>
+      <div class="form-block">
+        <color-form button-text="Add Color" @submit-color="addColor($event)" />
+      </div>
+    </page-layout>
   `,
 });
