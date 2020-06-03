@@ -1,11 +1,11 @@
 <template>
   <tr>
     <td>{{car.id}}</td> 
-    <td><input type="text" v-model="carForm.make"></td> 
-    <td><input type="text" v-model="carForm.model"></td> 
-    <td><input type="text" v-model="carForm.year"></td> 
-    <td><input type="text" v-model="carForm.color"></td> 
-    <td><input type="text" v-model="carForm.price"></td>
+    <td><input type="text" v-bind:id=" 'edit-make-input-' + tableId " v-model="carForm.make"></td> 
+    <td><input type="text" v-bind:id=" 'edit-model-input-' + tableId " v-model="carForm.model"></td> 
+    <td><input type="text" v-bind:id=" 'edit-year-input-' + tableId " v-model="carForm.year"></td> 
+    <td><input type="text" v-bind:id=" 'edit-color-input-' + tableId " v-model="carForm.color"></td> 
+    <td><input type="text" v-bind:id=" 'edit-price-input-' + tableId " v-model="carForm.price"></td>
     <td>
       <button type="button" @click="saveCar()">Save</button>
       <button type="button" @click="$emit('cancel-car')">Cancel</button>
@@ -17,6 +17,9 @@
 export default {
   name: 'car-edit-row',
   props: {
+    tableId: {
+      type: Number,
+    },
     car: {
       type: Object
     }

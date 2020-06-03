@@ -23,37 +23,14 @@ new Vue({
     'car-form': CarFormComponent,
     'page-layout': PageLayoutComponent,
   },
-  data: {
-    editCarId: -1,
-  },
   computed: {
-    ...mapGetters([ 'cars' ]),
+    ...mapGetters([ 'sortedCars', 'editCarId' ]),
   },
   methods: {
-    ...mapMutations([ 'addCar' ]),
-    // addCar(car) {
-    //   this.cars.push({
-    //     id: Math.max(...this.cars.map(c => c.id), 0) + 1,
-    //     ...car,
-    //   });
-    //   this.editCarId = -1;
-    // },
-    deleteCar(carId) {
-      const carIndex = this.cars.findIndex(c => c.id === carId);
-      this.cars.splice(carIndex, 1);
-      this.editCarId = -1;
-    },
-    saveCar(car) {
-      const carIndex = this.cars.findIndex(c => c.id === car.id);
-      this.cars.splice(carIndex, 1, car);
-      this.editCarId = -1;
-    },
-    editCar(carId) {
-      this.editCarId = carId;
-    },
-    cancelCar() {
-      this.editCarId = -1;
-    }
+    ...mapMutations([
+      'addCar', 'saveCar', 'deleteCar',
+      'editCar', 'cancelCar', 'sortCar',
+    ]),
   },
   template: `
     <page-layout>
@@ -62,9 +39,11 @@ new Vue({
       </template>
       <template v-slot:table-block>
         <section-header header-text="Car Table" />
-        <car-table :cars="cars" :editCarId="editCarId"
+        <car-table :cars="sortedCars" :editCarId="editCarId"
           @edit-car="editCar($event)" @delete-car="deleteCar($event)"
-          @save-car="saveCar($event)" @cancel-car="cancelCar()" />
+          @save-car="saveCar($event)" @cancel-car="cancelCar()"
+          @sort-car="sortCar($event)"
+           />
       </template>
       <template v-slot:form-block>
         <section-header header-text="Car Form" />
