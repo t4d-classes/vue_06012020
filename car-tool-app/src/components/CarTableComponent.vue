@@ -4,27 +4,27 @@
       <tr>
         <th>Id</th>
         <th>
-          <button @click="$emit('sort-car', 'make')">
+          <button @click="editCarId === -1 && $emit('sort-car', 'make')">
             <label v-bind:for=" 'edit-make-input-' + tableId ">Make</label>
           </button>
         </th>
         <th>
-          <button @click="$emit('sort-car', 'model')">
+          <button @click="editCarId === -1 && $emit('sort-car', 'model')">
             <label v-bind:for=" 'edit-model-input-' + tableId ">Model</label>
           </button>
         </th>
         <th>
-          <button @click="$emit('sort-car', 'year')">
+          <button @click="editCarId === -1 && $emit('sort-car', 'year')">
             <label v-bind:for=" 'edit-year-input-' + tableId ">Year</label>
           </button>
         </th>
         <th>
-          <button @click="$emit('sort-car', 'color')">
+          <button @click="editCarId === -1 && $emit('sort-car', 'color')">
             <label v-bind:for=" 'edit-color-input-' + tableId ">Color</label>
           </button>
         </th>
         <th>
-          <button @click="$emit('sort-car', 'price')">
+          <button @click="editCarId === -1 && $emit('sort-car', 'price')">
             <label v-bind:for=" 'edit-price-input-' + tableId ">Price</label>
           </button>
         </th>
