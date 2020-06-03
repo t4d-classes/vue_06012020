@@ -1,5 +1,6 @@
 import Vue from 'vue';
 
+import PageLayoutComponent from './components/PageLayoutComponent';
 import PageHeaderComponent from './components/PageHeaderComponent';
 import PageFooterComponent from './components/PageFooterComponent';
 import SectionHeaderComponent from './components/SectionHeaderComponent';
@@ -15,6 +16,7 @@ new Vue({
     'section-header': SectionHeaderComponent,
     'car-table': CarTableComponent,
     'car-form': CarFormComponent,
+    'page-layout': PageLayoutComponent,
   },
   data: {
     cars: [
@@ -49,15 +51,23 @@ new Vue({
     }
   },
   template: `
-    <div>
-      <page-header header-text="Car Tool" />
-      <section-header header-text="Car Table" />
-      <car-table :cars="cars" :editCarId="editCarId"
-        @edit-car="editCar($event)" @delete-car="deleteCar($event)"
-        @save-car="saveCar($event)" @cancel-car="cancelCar()" />
-      <section-header header-text="Car Form" />
-      <car-form button-text="Add Car" @submit-car="addCar($event)" />
-      <page-footer company-name="My Car Company, Inc." />
-    </div>
+    <page-layout>
+      <template v-slot:header-block>
+        <page-header header-text="Car Tool" />
+      </template>
+      <template v-slot:table-block>
+        <section-header header-text="Car Table" />
+        <car-table :cars="cars" :editCarId="editCarId"
+          @edit-car="editCar($event)" @delete-car="deleteCar($event)"
+          @save-car="saveCar($event)" @cancel-car="cancelCar()" />
+      </template>
+      <template v-slot:form-block>
+        <section-header header-text="Car Form" />
+        <car-form button-text="Add Car" @submit-car="addCar($event)" />
+      </template>
+      <template v-slot:footer-block>
+        <page-footer company-name="My Car Company, Inc." />
+      </template>
+    </page-layout>
   `,
 });

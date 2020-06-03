@@ -22,4 +22,15 @@ export default {
 
 <style scoped>
 
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  small {
+    font-size: 0.8rem;
+  }
+
 </style>

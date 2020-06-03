@@ -11,3 +11,8 @@ h1 {
   font-weight: bold;
 }
 
+.header-block, .footer-block {
+  background-color: navy;
+  color: white;
+}
+
