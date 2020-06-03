@@ -18,7 +18,7 @@ export default {
   name: 'car-edit-row',
   props: {
     tableId: {
-      type: Number,
+      type: String,
     },
     car: {
       type: Object

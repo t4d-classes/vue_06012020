@@ -4,28 +4,28 @@
       <tr>
         <th>Id</th>
         <th>
-          <button @click="editCarId === -1 && $emit('sort-car', 'make')">
-            <label v-bind:for=" 'edit-make-input-' + tableId ">Make</label>
+          <button @click="sortCars('make')">
+            <label v-once v-bind:for="fieldId('make', tableId)">Make</label>
           </button>
         </th>
         <th>
-          <button @click="editCarId === -1 && $emit('sort-car', 'model')">
-            <label v-bind:for=" 'edit-model-input-' + tableId ">Model</label>
+          <button @click="sortCars('model')">
+            <label v-once v-bind:for="fieldId('model', tableId)">Model</label>
           </button>
         </th>
         <th>
-          <button @click="editCarId === -1 && $emit('sort-car', 'year')">
-            <label v-bind:for=" 'edit-year-input-' + tableId ">Year</label>
+          <button @click="sortCars('year')">
+            <label v-once v-bind:for="fieldId('year', tableId)">Year</label>
           </button>
         </th>
         <th>
-          <button @click="editCarId === -1 && $emit('sort-car', 'color')">
-            <label v-bind:for=" 'edit-color-input-' + tableId ">Color</label>
+          <button @click="sortCars('color')">
+            <label v-once v-bind:for="fieldId('color', tableId)">Color</label>
           </button>
         </th>
         <th>
-          <button @click="editCarId === -1 && $emit('sort-car', 'price')">
-            <label v-bind:for=" 'edit-price-input-' + tableId ">Price</label>
+          <button @click="sortCars('price')">
+            <label v-once v-bind:for="fieldId('price', tableId)">Price</label>
           </button>
         </th>
         <th>Actions</th>
@@ -33,8 +33,8 @@
     </thead>
     <tbody>
       <template v-for="car in cars">
-        <car-edit-row v-if="car.id === editCarId" :car="car" :key="car.id"
-          @save-car="$emit('save-car', $event)" @cancel-car="$emit('cancel-car')" :table-id="tableId" />
+        <car-edit-row v-if="car.id === editCarId" :car="car" :key="car.id" :table-id="tableId"
+          @save-car="$emit('save-car', $event)" @cancel-car="$emit('cancel-car')" />
         <car-view-row v-else :car="car" :key="car.id"
           @edit-car="$emit('edit-car', $event)" @delete-car="$emit('delete-car', $event)" />
       </template>
@@ -69,6 +69,18 @@ export default {
       return uniqueId();
     },
   },
+  methods: {
+    sortCars(fieldName) {
+      console.log('sortCars, fieldName: ', fieldName);
+      if (this.editCarId === -1) {
+        this.$emit('sort-car', fieldName);
+      }
+    },
+    fieldId(fieldName) {
+      console.log('fieldId, fieldName: ', fieldName, ', tableId: ', this.tableId);
+      return 'edit-' + fieldName + '-input-' + this.tableId;
+    },
+  }
 };
 </script>
 
