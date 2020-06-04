@@ -113,10 +113,22 @@
 //   .then(res => res.json())
 //   .then(cars => console.log(cars));
 
-fetch('http://localhost:3070/cars', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ make: 'Ford', model: 'T', year: 1920, color: 'black', price: 400 }),
-})
-  .then(res => res.json())
-  .then(car => console.log(car));
+// fetch('http://localhost:3070/cars', {
+//   method: 'POST',
+//   headers: { 'Content-Type': 'application/json' },
+//   body: JSON.stringify({ make: 'Ford', model: 'T', year: 1920, color: 'black', price: 400 }),
+// })
+//   .then(res => res.json())
+//   .then(car => console.log(car));
+
+// Lab Exercise - Chain the Following Operations using the Official Fetch API
+
+// 1. Get All the Cars and Display the Results in Console
+// 2. Add a New Car
+// 3. Retrieve the New Car from the REST API
+// 4. Replace the New Car with another Car that has a different color.
+// 5. Get all of the car from the REST API
+// 6. Delete the car you added.
+// 7. Get all of the car from the REST API
+
+
