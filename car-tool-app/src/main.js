@@ -2,12 +2,12 @@ import Vue from 'vue';
 import Vuex, { mapGetters, mapMutations, mapState, mapActions } from 'vuex';
 
 import { createStore } from './store';
-import PageLayoutComponent from './components/PageLayoutComponent';
-import PageHeaderComponent from './components/PageHeaderComponent';
-import PageFooterComponent from './components/PageFooterComponent';
-import SectionHeaderComponent from './components/SectionHeaderComponent';
-import CarTableComponent from './components/CarTableComponent';
-import CarFormComponent from './components/CarFormComponent';
+import PageLayout from './components/PageLayoutComponent';
+import PageHeader from './components/PageHeaderComponent';
+import PageFooter from './components/PageFooterComponent';
+import SectionHeader from './components/SectionHeaderComponent';
+import CarTable from './components/CarTableComponent';
+import CarForm from './components/CarFormComponent';
 
 Vue.use(Vuex);
 
@@ -16,12 +16,12 @@ new Vue({
   el: '#app',
   store: createStore(),
   components: {
-    PageHeader: PageHeaderComponent,
-    'page-footer': PageFooterComponent,
-    'section-header': SectionHeaderComponent,
-    'car-table': CarTableComponent,
-    'car-form': CarFormComponent,
-    'page-layout': PageLayoutComponent,
+    PageHeader,
+    PageFooter,
+    SectionHeader,
+    CarTable,
+    CarForm,
+    PageLayout,
   },
   computed: {
     ...mapState([ 'editCarId', 'isLoading' ]),
@@ -29,10 +29,16 @@ new Vue({
   },
   methods: {
     ...mapMutations([
-      'addCar', 'saveCar', 'deleteCar',
       'editCar', 'cancelCar', 'sortCar',
     ]),
-    ...mapActions([ 'refreshCars' ]),
+    ...mapActions([
+      'refreshCars', 'addCar',
+      'saveCar', 'deleteCar',
+    ]),
+    async saveAndRefreshCars(car) {
+      await this.saveCar(car);
+      await this.refreshCars();
+    },
   },
   mounted() {
     this.refreshCars();
@@ -47,7 +53,7 @@ new Vue({
           <section-header header-text="Car Table" />
           <car-table :cars="sortedCars" :editCarId="editCarId"
             @edit-car="editCar($event)" @delete-car="deleteCar($event)"
-            @save-car="saveCar($event)" @cancel-car="cancelCar()"
+            @save-car="saveAndRefreshCars($event)" @cancel-car="cancelCar()"
             @sort-car="sortCar($event)"
             />
         </template>

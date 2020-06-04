@@ -1,5 +1,7 @@
 import Vuex from 'vuex';
 
+import { getAllCars, appendCar, replaceCar, deleteCar } from './services/cars';
+
 export const createStore = () => {
   return new Vuex.Store({
     state: {
@@ -25,22 +27,8 @@ export const createStore = () => {
       setCars: (state, cars) => {
         state.cars = cars;
       },
-      addCar: (state, car) => {
-        state.cars.push({
-          id: Math.max(...state.cars.map(c => c.id), 0) + 1,
-          ...car,
-        });
-        state.editCarId = -1;
-      },
-      deleteCar(state, carId) {
-        const carIndex = state.cars.findIndex(c => c.id === carId);
-        state.cars.splice(carIndex, 1);
-        state.editCarId = -1;
-      },
-      saveCar(state, car) {
-        const carIndex = state.cars.findIndex(c => c.id === car.id);
-        state.cars.splice(carIndex, 1, car);
-        state.editCarId = -1;
+      setEditCarId: (state, editCarId) => {
+        state.editCarId = editCarId;
       },
       editCar(state, carId) {
         state.editCarId = carId;
@@ -57,15 +45,33 @@ export const createStore = () => {
     },
     actions: {
       refreshCars: async ({ commit }) => {
-
         commit('setIsLoading', true);
-
-        const res = await fetch('http://localhost:3070/cars');
-        const cars = await res.json();
-
+        const cars = await getAllCars();
         commit('setCars', cars);
+        commit('setEditCarId', -1);
         commit('setIsLoading', false);
-
+      },
+      // option 1 multiple async operations within an action
+      addCar: async ({ commit }, car) => {
+        commit('setIsLoading', true);
+        await appendCar(car);
+        const cars = await getAllCars();
+        commit('setCars', cars);
+        commit('setEditCarId', -1);
+        commit('setIsLoading', false);
+      },
+      // option 2 chain in main
+      saveCar: async ({ commit }, car) => {
+        commit('setIsLoading', true);
+        await replaceCar(car);
+        commit('setIsLoading', false);
+      },
+      // option 3 dispatch
+      deleteCar: async ({ commit, dispatch }, carId) => {
+        commit('setIsLoading', true);
+        await deleteCar(carId);
+        commit('setIsLoading', false);
+        dispatch('refreshCars');
       },
     },
   });
