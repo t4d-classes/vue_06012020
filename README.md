@@ -58,12 +58,11 @@ Next, the `package.json` needs to be updated to easily run the REST API provides
 
 ```json
 "scripts": {
-  "start": "run-p web rest",
-  "web": "react-scripts start",
+  "start": "run-p rest serve",
   "rest": "json-server --port 3060 ./db.json",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
+  "serve": "vue-cli-service serve",
+  "build": "vue-cli-service build",
+  "lint": "vue-cli-service lint"
 },
 ```
 
