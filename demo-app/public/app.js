@@ -161,33 +161,92 @@ const deleteCar = (carId) =>
   })
     .then(res => res.json());
 
-getAllCars()
-  .then(cars => {
+// getAllCars()
+//   .then(cars => {
+//     console.log(cars);
+//   })
+//   .then(() => {
+//     return appendCar({ make: 'Ford', model: 'T', year: 1920, color: 'black', price: 400 })
+//   })
+//   .then(car => {
+//     return getOneCar(car.id);
+//   })
+//   .then(car => {
+//     console.log(car);
+//     car.color = 'purple';
+//     return replaceCar(car)
+//       .then(() => {
+//         return getAllCars();
+//       })
+//       .then(cars => {
+//         console.log(cars);
+//         return deleteCar(car.id);
+//       });
+//   })
+//   .then(() => {
+//     return getAllCars();
+//   })
+//   .then(cars => {
+//     console.log(cars);
+//   });
+
+const doSomeCrazyStuffWithCar = async () => {
+
+  try {
+
+    let cars = await getAllCars();
     console.log(cars);
-  })
-  .then(() => {
-    return appendCar({ make: 'Ford', model: 'T', year: 1920, color: 'black', price: 400 })
-  })
-  .then(car => {
-    return getOneCar(car.id);
-  })
-  .then(car => {
+
+    let car = await appendCar({
+      make: 'Ford', model: 'T', year: 1920, color: 'black', price: 400,
+    });
+
+    car = await getOneCar(car.id);
     console.log(car);
+
     car.color = 'purple';
-    return replaceCar(car)
-      .then(() => {
-        return getAllCars();
-      })
-      .then(cars => {
-        console.log(cars);
-        return deleteCar(car.id);
-      });
-  })
-  .then(() => {
-    return getAllCars();
-  })
-  .then(cars => {
+    await replaceCar(car);
+
+    cars = await getAllCars();
     console.log(cars);
-  });
+
+    await deleteCar(car.id);
+
+    cars = await getAllCars();
+    console.log(cars);
   
+  } catch(err) {
+    console.log(err);
+  }
+
+};
+
+doSomeCrazyStuffWithCar();
+
+
+
+  
+
+// const p1 = new Promise(resolve => setTimeout(() => resolve('a'), 2000));
+// const p2 = new Promise(resolve => setTimeout(() => resolve('b'), 4000));
+// const p3 = new Promise((resolve, reject) => setTimeout(() => reject('c'), 6000));
+// const p4 = new Promise(resolve => setTimeout(() => resolve('d'), 8000));
+
+
+// p1.then(result => console.log(result));
+// p2.then(result => console.log(result));
+// p3.then(result => console.log(result)).catch(err => console.log('rejected: ', err));
+// p4.then(result => console.log(result));
+
+// Promise.all([ p1, p2, p3, p4 ])
+//   .then(results => {
+//     console.log('all done');
+//     console.log(results);
+//   })
+//   .catch(results => {
+//     console.log('one failed');
+//     console.log(results);
+//   });
+
+
 
