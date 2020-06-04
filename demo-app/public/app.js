@@ -32,7 +32,7 @@ setTimeout(() => {
 // Rules:
 // 1. All three setTimeout's have to be initiated in the first task.
 // 2. You cannot change the delay values (view them as random) and you cannot wrap the allDone in a setTimeout which is larger than all of the others
-
+// 3. You cannot use promises...
 
 
 
