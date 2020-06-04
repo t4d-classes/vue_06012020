@@ -131,4 +131,63 @@
 // 6. Delete the car you added.
 // 7. Get all of the car from the REST API
 
+const getAllCars = () =>
+  fetch('http://localhost:3070/cars')
+    .then(res => res.json());
+
+const getOneCar = (carId) =>
+  fetch('http://localhost:3070/cars/' + encodeURIComponent(carId))
+    .then(res => res.json());
+
+const appendCar = car => 
+  fetch('http://localhost:3070/cars', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(car),
+  })
+    .then(res => res.json());
+
+const replaceCar = car => 
+  fetch('http://localhost:3070/cars/' + encodeURIComponent(car.id), {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(car),
+  })
+    .then(res => res.json());
+  
+const deleteCar = (carId) =>
+  fetch('http://localhost:3070/cars/' + encodeURIComponent(carId), {
+    method: 'DELETE',
+  })
+    .then(res => res.json());
+
+getAllCars()
+  .then(cars => {
+    console.log(cars);
+  })
+  .then(() => {
+    return appendCar({ make: 'Ford', model: 'T', year: 1920, color: 'black', price: 400 })
+  })
+  .then(car => {
+    return getOneCar(car.id);
+  })
+  .then(car => {
+    console.log(car);
+    car.color = 'purple';
+    return replaceCar(car)
+      .then(() => {
+        return getAllCars();
+      })
+      .then(cars => {
+        console.log(cars);
+        return deleteCar(car.id);
+      });
+  })
+  .then(() => {
+    return getAllCars();
+  })
+  .then(cars => {
+    console.log(cars);
+  });
+  
 
