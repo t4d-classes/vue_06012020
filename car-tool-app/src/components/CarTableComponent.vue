@@ -37,6 +37,11 @@
       </tr>
     </thead>
     <tbody>
+      <tr v-if="!cars.length">
+        <td colspan="7">
+          There are no cars.
+        </td>
+      </tr>
       <template v-for="car in cars">
         <car-edit-row v-if="car.id === editCarId" :car="car" :key="car.id" :table-id="tableId"
           @save-car="$emit('save-car', $event)" @cancel-car="$emit('cancel-car')" />

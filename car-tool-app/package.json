@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "run-p rest serve",
-    "rest": "json-server --port 3060 ./db.json",
+    "rest": "json-server -d 3000 --port 3070 ./db.json",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
