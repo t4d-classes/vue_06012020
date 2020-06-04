@@ -1,41 +1,72 @@
 'use strict';
 
-// setTimeout(() => {
-//     console.log('a');
-//     setTimeout(() => {
-//         console.log('b');
-//         setTimeout(() => {
-//             console.log('c');
-//         }, 500);
-//     }, 1000);
-// }, 2000);
+// class Promise {
 
-const allDone = () => {
-  console.log('all done');
-};
+//   constructor(fn) {
 
-setTimeout(() => {
-  console.log('a');
-}, 2000);
+//     this.resolveFns = [];
+//     this.rejectFns = [];
 
-setTimeout(() => {
-  console.log('b');
-}, 500);
+//     const resolve = (data) => {
+//       this.resolveFns.forEach(resolveFn => resolveFn(data));
+//     };
 
-setTimeout(() => {
-  console.log('c');
-}, 1000);
+//     const reject = (data) => {
+//       this.rejectFns.forEach(rejectFn => rejectFn(data));
+//     };
 
-// Lab Exercise:
+//     fn(resolve, reject);
+//   }
 
-// Run the allDone after all three setTimeouts have expired, and their code has executed.
-// Rules:
-// 1. All three setTimeout's have to be initiated in the first task.
-// 2. You cannot change the delay values (view them as random) and you cannot wrap the allDone in a setTimeout which is larger than all of the others
-// 3. You cannot use promises...
+//   then(cb) {
+//     this.resolveFns.push(cb);
+//   }
+
+//   catch(cb) {
+//     this.rejectFns.push(cb);
+//   }
+// }
 
 
+// console.log('creating promise');
+
+// const p = new Promise((resolve, reject) => {
+
+//   console.log('calling host function: setTimeout');
+
+//   setTimeout(() => {
+//     console.log('calling reject');
+//     reject('some error');
+//   }, 2000);
+
+// });
 
 
+// p
+//   .then((result) => {
+//     console.log('resolved:', result);
+//   })
+//   .catch(result => {
+//     console.log('rejected:', result);
+//   });
 
+// console.log('waiting');
 
+const xhr = new XMLHttpRequest();
+
+xhr.addEventListener('readystatechange', () => {
+
+  if (xhr.status === 200 && xhr.readyState === 4) {
+    console.log(JSON.parse(xhr.responseText));
+  }
+
+});
+
+xhr.open('GET', 'http://localhost:3070/cars');
+xhr.send();
+
+// Exercise
+// Implement the following myFetch function, I should be able to take this code and paste into your file, and the code works.
+// The cars variable should be populated with an array of cars.
+
+myFetch('http://localhost:3070/cars').then(cars => console.log(cars));
