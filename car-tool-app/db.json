@@ -32,6 +32,30 @@
       "year": 2018,
       "color": "red",
       "price": 100000
+    },
+    {
+      "make": "Tesla",
+      "model": "X",
+      "color": "black",
+      "year": "2020",
+      "price": "200000",
+      "id": 3
+    },
+    {
+      "make": "Tesla",
+      "model": "3",
+      "color": "blue",
+      "year": "2019",
+      "price": "50000",
+      "id": 4
+    },
+    {
+      "make": "a",
+      "model": "a",
+      "color": "a",
+      "year": 1900,
+      "price": 2000,
+      "id": 5
     }
   ]
 }

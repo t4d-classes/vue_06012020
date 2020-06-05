@@ -2,23 +2,23 @@
   <form>
     <div>
       <label for="car-make-input">Make</label>
-      <input type="text" id="car-make-input" v-model="carForm.make" >
+      <input type="text" id="car-make-input" v-model.lazy.trim="carForm.make" v-focus.active="carForm.make">
     </div>
     <div>
       <label for="car-model-input">Model</label>
-      <input type="text" id="car-model-input" v-model="carForm.model" >
+      <input type="text" id="car-model-input" v-model.lazy.trim="carForm.model" >
     </div>
     <div>
       <label for="car-year-input">Year</label>
-      <input type="text" id="car-year-input" v-model="carForm.year" >
+      <input type="number" id="car-year-input" v-model.lazy.number="carForm.year" >
     </div>
     <div>
       <label for="car-color-input">Color</label>
-      <input type="text" id="car-color-input" v-model="carForm.color" >
+      <input type="text" id="car-color-input" v-model.lazy.trim="carForm.color" >
     </div>
     <div>
       <label for="car-price-input">Price</label>
-      <input type="text" id="car-price-input" v-model="carForm.price" >
+      <input type="number" id="car-price-input" v-model.lazy.number="carForm.price" >
     </div>
     <button type="button" @click="submitCar()">{{buttonText}}</button>
   </form>
@@ -33,6 +33,17 @@
         default: () => 'Submit Car',
       },
     },
+    directives: {
+      focus: {
+        inserted(el, binding) {
+          console.dir(binding);
+
+          if (binding.modifiers.active) {
+            el.focus();
+          }
+        },
+      },
+    },
     data() {
       return {
         carForm: {
@@ -43,6 +54,9 @@
           price: '',
         },
       };
+    },
+    updated() {
+      console.log('updating car form');
     },
     methods: {
       submitCar() {
